@@ -95,6 +95,20 @@ type SequenceMissionData = {
 
 type Mission = ChoiceMissionData | SortMissionData | MazeMissionData | MemoryMissionData | OddMissionData | SequenceMissionData;
 
+type BalloonReward = {
+  mission: number;
+  color: string;
+  filter: string;
+};
+
+const balloonRewards: BalloonReward[] = [
+  { mission: 0, color: "azul", filter: "hue-rotate(190deg)" },
+  { mission: 3, color: "amarelo", filter: "hue-rotate(55deg) saturate(1.4)" },
+  { mission: 6, color: "vermelho", filter: "none" },
+  { mission: 9, color: "verde", filter: "hue-rotate(105deg)" },
+  { mission: 12, color: "roxo", filter: "hue-rotate(250deg)" },
+];
+
 const missions: Mission[] = [
   {
     type: "choice",
@@ -977,11 +991,29 @@ function TeacherPanel({ onClose }: { onClose: () => void }) {
   );
 }
 
+function BalloonCelebration({ reward, number, onContinue }: { reward: BalloonReward; number: number; onContinue: () => void }) {
+  return (
+    <div className="modal-backdrop balloon-backdrop" role="dialog" aria-modal="true" aria-labelledby="balloon-title">
+      <section className="balloon-celebration">
+        <div className="balloon-burst" aria-hidden="true">✦ · ✦ · ✦</div>
+        <span className="balloon-figure" style={{ filter: reward.filter }} role="img" aria-label={`Balão ${reward.color}`}>🎈</span>
+        <p className="eyebrow">PROBLEMA RESOLVIDO</p>
+        <h2 id="balloon-title">Você ganhou um balão!</h2>
+        <p>A equipe conquistou o balão {reward.color}.</p>
+        <strong className="balloon-progress">BALÃO {number} DE {balloonRewards.length}</strong>
+        <button className="primary-button" onClick={onContinue}>Continuar</button>
+      </section>
+    </div>
+  );
+}
+
 export default function Home() {
   const [screen, setScreen] = useState<"start" | "game" | "finish">("start");
   const [teamName, setTeamName] = useState("");
   const [missionIndex, setMissionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [balloons, setBalloons] = useState(0);
+  const [balloonReward, setBalloonReward] = useState<BalloonReward | null>(null);
   const [sound, setSound] = useState(true);
   const [teacherOpen, setTeacherOpen] = useState(false);
   const mission = missions[missionIndex];
@@ -994,12 +1026,28 @@ export default function Home() {
 
   function completeMission(points: number) {
     setScore((value) => value + points);
+    const reward = balloonRewards.find((item) => item.mission === missionIndex);
+    if (reward) {
+      setBalloons(balloonRewards.indexOf(reward) + 1);
+      setBalloonReward(reward);
+      playTone("ok", sound);
+      return;
+    }
+    advanceMission();
+  }
+
+  function advanceMission() {
     if (missionIndex === missions.length - 1) setScreen("finish");
     else setMissionIndex((value) => value + 1);
   }
 
+  function continueAfterBalloon() {
+    setBalloonReward(null);
+    advanceMission();
+  }
+
   function restart() {
-    setMissionIndex(0); setScore(0); setTeamName(""); setScreen("start");
+    setMissionIndex(0); setScore(0); setBalloons(0); setBalloonReward(null); setTeamName(""); setScreen("start");
   }
 
   return (
@@ -1009,6 +1057,7 @@ export default function Home() {
         <a className="brand" href="#top" aria-label="Missão IA do IMDAZ"><span className="brand-mark">I</span><span><strong>IMDAZ</strong><small>MISSÃO IA</small></span></a>
         <div className="top-actions">
           {screen === "game" && <div className="score-chip"><span>✦</span><strong>{score}</strong></div>}
+          {screen === "game" && <div className="balloon-chip" aria-label={`${balloons} de ${balloonRewards.length} balões conquistados`}><span aria-hidden="true">🎈</span><strong>{balloons}/{balloonRewards.length}</strong></div>}
           <button className="icon-button" onClick={() => setSound((value) => !value)} aria-label={sound ? "Desativar sons" : "Ativar sons"}>{sound ? "♪" : "×♪"}</button>
           <button className="teacher-button" onClick={() => setTeacherOpen(true)}>Área do professor</button>
         </div>
@@ -1056,6 +1105,10 @@ export default function Home() {
           <div className="confetti" aria-hidden="true">✦ · ◇ · ✦ · ◈ · ✦ · ◇ · ✦</div>
           <p className="eyebrow">PORTAL ABERTO · MISSÃO CONCLUÍDA</p><h1>{title}</h1>
           <p>A equipe <strong>{teamName}</strong> completou os treze setores e demonstrou que uma IA responsável exige dados adequados, testes, privacidade, justiça e supervisão humana.</p>
+          <div className="balloon-collection" aria-label="Cinco balões conquistados">
+            {balloonRewards.map((reward) => <span key={reward.color} style={{ filter: reward.filter }} role="img" aria-label={`Balão ${reward.color}`}>🎈</span>)}
+            <strong>5 balões conquistados</strong>
+          </div>
           <div className="final-score"><span>PONTUAÇÃO</span><strong>{score}</strong><small>cristais de conhecimento</small></div>
           <div className="principle-grid"><span>▦ <strong>Dados</strong></span><span>⌕ <strong>Testes</strong></span><span>◇ <strong>Privacidade</strong></span><span>⚖ <strong>Justiça</strong></span><span>◎ <strong>Pessoas</strong></span></div>
           <div className="finish-actions"><button className="primary-button" onClick={() => window.print()}>Imprimir certificado</button><button className="secondary-button" onClick={restart}>Nova equipe</button></div>
@@ -1063,6 +1116,7 @@ export default function Home() {
       )}
 
       {teacherOpen && <TeacherPanel onClose={() => setTeacherOpen(false)} />}
+      {balloonReward && <BalloonCelebration reward={balloonReward} number={balloons} onContinue={continueAfterBalloon} />}
       <footer><span>IMDAZ · Atividade educativa</span><span>Nenhum dado é enviado ou armazenado</span></footer>
     </main>
   );
