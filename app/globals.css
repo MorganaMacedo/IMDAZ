@@ -39,7 +39,10 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--yellow); ou
 .icon-button, .teacher-button, .secondary-button { border: 1px solid var(--line); color: var(--ink); background: rgba(17, 22, 45, .8); }
 .icon-button { width: 42px; height: 42px; border-radius: 50%; font-weight: 900; }
 .teacher-button { min-height: 42px; padding: 0 16px; border-radius: 6px; font-size: 13px; font-weight: 800; }
-.score-chip { display: flex; gap: 8px; align-items: center; padding: 8px 12px; border: 1px solid #625f35; background: #292817; color: var(--yellow); }
+.score-chip, .balloon-chip { min-height: 42px; display: flex; gap: 8px; align-items: center; padding: 8px 12px; font-variant-numeric: tabular-nums; }
+.score-chip { border: 1px solid #625f35; background: #292817; color: var(--yellow); }
+.balloon-chip { border: 1px solid #744451; background: #2b1923; color: #ff9cb9; }
+.balloon-chip span { font-size: 20px; }
 
 .hero { width: min(1180px, calc(100% - 36px)); min-height: calc(100vh - 140px); margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 56px; padding: 54px 0 74px; }
 .eyebrow { color: var(--cyan); font-size: 12px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
@@ -180,6 +183,9 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--yellow); ou
 .final-score { min-width: 270px; margin: 28px 0; padding: 19px 34px; display: flex; flex-direction: column; border: 1px solid #6c6841; background: #292817; }
 .final-score span, .final-score small { color: #c8c28d; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }.final-score strong { color: var(--yellow); font-size: 46px; }
 .principle-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }.principle-grid span { padding: 10px 13px; border: 1px solid var(--line); background: #151b37; color: var(--cyan); }.principle-grid strong { color: var(--ink); }
+.balloon-collection { margin-top: 22px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 7px; }
+.balloon-collection span { display: inline-block; font-size: 36px; filter-origin: center; }
+.balloon-collection strong { width: 100%; margin-top: 3px; color: #ffb3c8; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .finish-actions { display: flex; gap: 12px; margin-top: 30px; }.secondary-button { font-weight: 800; }
 
 .modal-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(5, 7, 17, .82); backdrop-filter: blur(8px); }
@@ -187,6 +193,14 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--yellow); ou
 .teacher-panel h2 { margin: 7px 40px 24px 0; font-size: clamp(26px, 4vw, 39px); }.close-button { position: absolute; right: 18px; top: 18px; width: 37px; height: 37px; border: 1px solid var(--line); background: transparent; color: white; font-size: 25px; }
 .teacher-timeline { border-left: 2px solid var(--cyan); }.teacher-timeline div { display: grid; grid-template-columns: 90px 1fr; gap: 15px; padding: 12px 18px; }.teacher-timeline strong { color: var(--cyan); }.teacher-timeline span { color: var(--muted); line-height: 1.45; }
 .teacher-note { margin: 24px 0; padding: 15px; border-left: 4px solid var(--yellow); background: rgba(255, 231, 91, .07); color: #dce2f5; line-height: 1.55; }
+.balloon-backdrop { background: rgba(5, 7, 17, .9); }
+.balloon-celebration { width: min(560px, 100%); min-height: 540px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 42px 30px; border: 2px solid #ff86aa; background: radial-gradient(circle at 50% 38%, rgba(255, 111, 189, .2), transparent 38%), #11162d; box-shadow: 16px 16px 0 #070914, 0 0 70px rgba(255, 111, 189, .2); text-align: center; }
+.balloon-burst { position: absolute; inset: 28px 0 auto; color: var(--yellow); font-size: 22px; letter-spacing: .45em; animation: shimmer 1.2s alternate infinite; }
+.balloon-figure { display: inline-block; margin: 18px 0 10px; font-size: clamp(118px, 28vw, 170px); line-height: 1; filter-origin: center; animation: balloon-float 1.8s ease-in-out infinite; }
+.balloon-celebration .eyebrow { margin: 8px 0 0; }
+.balloon-celebration h2 { margin: 10px 0 8px; font-size: clamp(32px, 7vw, 50px); line-height: 1.03; }
+.balloon-celebration > p:not(.eyebrow) { margin: 0; color: var(--muted); font-size: 17px; }
+.balloon-progress { margin: 22px 0; color: #ffb3c8; font-size: 12px; letter-spacing: .16em; }
 
 footer { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 22px 0; position: relative; z-index: 2; display: flex; justify-content: space-between; border-top: 1px solid rgba(153, 166, 218, .18); color: #707a9f; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
 
@@ -194,6 +208,7 @@ footer { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 22px 0;
 @keyframes blink { 0%, 47%, 51%, 100% { transform: scaleY(1); } 49% { transform: scaleY(.1); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes shimmer { from { opacity: .5; transform: translateY(0); } to { opacity: 1; transform: translateY(-5px); } }
+@keyframes balloon-float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-13px) rotate(2deg); } }
 
 @media (max-width: 820px) {
   .hero { grid-template-columns: 1fr; padding-top: 40px; }.robot-bay { min-height: 430px; }.orbit-one, .orbit-two { transform: scale(.75); }
@@ -202,7 +217,7 @@ footer { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 22px 0;
 }
 
 @media (max-width: 560px) {
-  .topbar { height: auto; min-height: 74px; }.brand small, .teacher-button { display: none; }.top-actions { gap: 6px; }
+  .topbar { height: auto; min-height: 74px; }.brand small, .teacher-button { display: none; }.top-actions { gap: 5px; }.score-chip, .balloon-chip { min-height: 38px; padding: 6px 8px; font-size: 12px; }.balloon-chip span { font-size: 17px; }
   .hero h1 { font-size: 45px; }.team-input > div { flex-direction: column; }.team-input button { min-height: 50px; }
   .robot-bay { transform: scale(.83); margin: -30px 0; }.hero-facts { display: grid; }
   .mission-stage { padding: 24px 18px 30px; }.mission-heading { align-items: flex-start; }.mission-symbol { flex: 0 0 auto; }
@@ -210,7 +225,7 @@ footer { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 22px 0;
   .memory-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }.odd-grid { grid-template-columns: repeat(3, 1fr); }.sequence-screen span { width: 50px; height: 50px; font-size: 28px; }.sequence-dpad { grid-template-columns: repeat(2, 1fr); }
   .maze-name { align-items: flex-start; flex-direction: column; }.maze-name small { text-align: left; }
   .map-node small { display: none; }.map-node span { width: 40px; height: 40px; }.team-strip { flex-wrap: wrap; justify-content: center; }
-  .teacher-panel { padding: 29px 20px; }.teacher-timeline div { grid-template-columns: 1fr; gap: 4px; }
+  .teacher-panel { padding: 29px 20px; }.teacher-timeline div { grid-template-columns: 1fr; gap: 4px; }.balloon-celebration { min-height: 500px; padding: 34px 18px; }.balloon-burst { letter-spacing: .25em; }
   .finish-actions { flex-direction: column; width: 100%; }.finish-actions button { width: 100%; }.principle-grid { display: grid; grid-template-columns: 1fr 1fr; }
   footer { flex-direction: column; gap: 8px; }
 }
