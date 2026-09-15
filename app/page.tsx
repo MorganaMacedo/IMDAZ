@@ -1074,6 +1074,7 @@ export default function Home() {
               <div><input value={teamName} onChange={(event) => setTeamName(event.target.value.slice(0, 24))} placeholder="Ex.: Estrelas Digitais" onKeyDown={(event) => event.key === "Enter" && startGame()} /><button onClick={startGame}>INICIAR</button></div>
             </label>
             <div className="hero-facts"><span><strong>2</strong> crianças por equipe</span><span><strong>70–90</strong> minutos de jogo</span><span><strong>5</strong> mapas</span></div>
+            <a className="circuit-lab-link" href="/IMDAZ/circuitos/"><span>⌁</span><div><strong>NOVA ATIVIDADE · 120 MINUTOS</strong><small>Abrir o Laboratório de Circuitos</small></div><b>→</b></a>
           </div>
           <div className="robot-bay" aria-label="Robô LUMI">
             <div className="orbit orbit-one" /><div className="orbit orbit-two" />

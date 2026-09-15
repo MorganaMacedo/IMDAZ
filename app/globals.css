@@ -59,6 +59,13 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--yellow); ou
 .hero-facts { display: flex; gap: 28px; margin-top: 32px; color: var(--muted); font-size: 12px; }
 .hero-facts span { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px; }
 .hero-facts strong { color: var(--cyan); font-size: 22px; }
+.circuit-lab-link { max-width: 620px; margin-top: 25px; display: grid; grid-template-columns: 47px 1fr auto; align-items: center; gap: 13px; padding: 13px 16px; border: 1px solid #435277; color: var(--ink); background: rgba(21, 28, 58, .86); text-decoration: none; box-shadow: 6px 6px 0 rgba(38, 47, 96, .62); }
+.circuit-lab-link:hover { border-color: var(--cyan); transform: translateY(-2px); }
+.circuit-lab-link > span { width: 42px; height: 42px; display: grid; place-items: center; color: #07161a; background: var(--cyan); font-size: 24px; font-weight: 900; }
+.circuit-lab-link > div { display: grid; gap: 3px; }
+.circuit-lab-link strong { color: var(--cyan); font-size: 10px; letter-spacing: .1em; }
+.circuit-lab-link small { color: var(--ink); font-size: 14px; font-weight: 900; }
+.circuit-lab-link b { color: var(--cyan); font-size: 24px; }
 
 .robot-bay { min-height: 560px; position: relative; display: grid; place-items: center; }
 .robot-bay::before { content: ""; position: absolute; width: 410px; height: 410px; border-radius: 50%; background: radial-gradient(circle, rgba(75, 235, 220, .17), transparent 65%); border: 1px dashed rgba(95, 226, 223, .28); }
