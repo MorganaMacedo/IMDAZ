@@ -1,0 +1,3 @@
+:HL["/IMDAZ/_next/static/chunks/06dlun9zh46-r.css","style"]
+:HL["/IMDAZ/_next/static/chunks/0jemmnblh.2rn.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"circuitos","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"qmoNB6My_lr77yRFLlWzC"}
