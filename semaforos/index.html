@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102541">
+<title>Missão Semáforos | IMDAZ</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#183148;background:#eff5fb}*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button{cursor:pointer}header{background:#102541;color:#fff;padding:18px max(16px,calc((100vw - 1240px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}header strong{font-size:1.35rem}.pill{padding:7px 13px;border-radius:100px;background:#ffffff1b}main{max-width:1240px;margin:auto;padding:20px 14px 70px}.intro{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.intro h1{margin:0;font-size:clamp(1.7rem,4vw,2.5rem)}.intro p{margin:8px 0;color:#516477}.missions{display:flex;gap:8px;overflow:auto;padding:14px 0 20px}.mission{min-width:142px;text-align:left;border:2px solid #d9e4ef;background:#fff;border-radius:14px;padding:11px;color:#193047}.mission.active{border-color:#147cd1;background:#e8f6ff}.mission:disabled{opacity:.53;cursor:not-allowed}.mission b{display:block;margin-bottom:4px}.mission small{display:block;margin-top:6px}.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px}.panel{background:#fff;border:1px solid #dae5ed;border-radius:18px;padding:20px;box-shadow:0 8px 25px #2445680a}.panel h2{margin:0 0 9px;font-size:1.18rem}.instructions{background:#eaf5ff;border-left:5px solid #1783d4;padding:14px;border-radius:8px;margin:12px 0;font-size:1rem;line-height:1.55}.flex{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.primary{border:0;background:#0878ca;color:white;border-radius:10px;padding:11px 16px;font-weight:700}.secondary{border:1px solid #b9cbdc;border-radius:10px;background:white;color:#173652;padding:10px 14px}.success{background:#e6f8ef;color:#11623a}.danger{background:#fff0eb;color:#9a2c1b}.notice{border-radius:12px;padding:12px;margin-top:12px;min-height:44px;font-weight:600}.stage{background:linear-gradient(#d3f0ff 0 56%,#6c8593 56% 100%);border-radius:16px;min-height:255px;position:relative;overflow:hidden;display:flex;justify-content:space-evenly;align-items:center;padding:24px 14px 50px}.stage:before{content:"";position:absolute;bottom:31px;left:0;right:0;height:4px;background:repeating-linear-gradient(90deg,#fff 0 36px,transparent 36px 62px)}.signal{z-index:1;background:#14212b;border:5px solid #293c4d;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:9px;box-shadow:6px 8px #17242d3b}.lamp{width:44px;height:44px;border-radius:50%;background:#34424b;box-shadow:inset 0 0 7px #0008}.lamp.red.on{background:#fa4242;box-shadow:0 0 18px 4px #fa4242}.lamp.yellow.on{background:#ffcd32;box-shadow:0 0 18px 4px #ffcd32}.lamp.green.on{background:#21df70;box-shadow:0 0 18px 4px #21df70}.signal-wrap{text-align:center;z-index:1}.signal-wrap b{display:block;background:#fff;padding:4px 8px;border-radius:7px;margin-top:8px}.board{padding:15px;border:2px solid #aac9d8;background:#e6f2f5;border-radius:13px;margin-top:12px}.wires{display:grid;gap:8px}.wire{display:grid;grid-template-columns:1fr 90px auto;gap:8px;align-items:center;background:#fff;padding:9px;border-radius:9px}.wire select{padding:7px;min-width:0}.wire input{width:18px;height:18px}.chip{background:#1678b9;color:white;padding:10px;border-radius:10px;display:inline-block;font-weight:700}.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tool{padding:11px;text-align:left;border:1px solid #bdd4e6;background:#f5faff;border-radius:10px;font-weight:700}.tool small{display:block;font-weight:400;margin-top:4px}.workspace{min-height:145px;background:#f2f6ff;border:2px dashed #c5d7e6;border-radius:12px;padding:12px;margin:12px 0}.block{display:flex;align-items:center;flex-wrap:wrap;gap:8px;background:#287bd2;color:white;margin:6px 0;padding:9px 10px;border-radius:9px;border-left:8px solid #12509c}.block.wait{background:#ed9b26;border-left-color:#ad611b;color:#252622}.block.loop{background:#9a5bd2;border-left-color:#65399a}.block select,.block input{border:0;border-radius:6px;padding:6px;max-width:105px;background:#fff;color:#172a40}.block .mini{margin-left:auto;border:0;border-radius:6px;background:#ffffff30;color:inherit;padding:5px 9px}.hint{background:#fff5d8;border-radius:10px;padding:13px;color:#5a440b;margin:12px 0}.stepbar{display:flex;gap:5px;margin:12px 0}.stepbar span{height:7px;border-radius:10px;background:#d7e7f1;flex:1}.stepbar span.done{background:#2595df}.muted{color:#5b6d7f;font-size:.9rem}.footer{margin:25px 0;text-align:center;color:#566778}details{margin-top:15px}summary{cursor:pointer;font-weight:700}@media(max-width:850px){.layout{grid-template-columns:1fr}.panel{padding:15px}.wire{grid-template-columns:1fr 75px auto}.mission{min-width:130px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><strong>🚦 Missão Semáforos <span style="font-size:.8rem;font-weight:400">IMDAZ</span></strong><div class="flex"><span class="pill" id="score">0 XP</span><span class="pill" id="badge">Explorador</span></div></header>
+<main>
+<div class="intro"><div><h1>Salve a cidade com programação!</h1><p>Monte o Arduino, escolha os blocos e coloque os semáforos para funcionar.</p></div><button class="secondary" id="reset">Recomeçar jogo</button></div>
+<nav class="missions" id="missions" aria-label="Missões"></nav>
+<div class="layout">
+<section class="panel">
+<h2 id="missionTitle"></h2><p id="missionStory" class="muted"></p><div class="stepbar" id="stepbar"></div>
+<div class="instructions" id="instruction" aria-live="polite"></div>
+<div class="flex"><button class="secondary" id="prevStep">Voltar etapa</button><button class="primary" id="nextStep">Próxima etapa</button></div>
+<h2 style="margin-top:22px">Sua cidade</h2><div class="stage" id="stage" aria-label="Simulação dos semáforos"></div>
+<div class="flex" style="margin-top:14px"><button class="primary" id="run">▶ Testar meu programa</button><button class="secondary" id="stop">■ Parar</button><button class="secondary" id="check">✓ Conferir missão</button></div>
+<div id="message" class="notice" aria-live="polite">Monte o circuito e experimente os blocos.</div>
+<details><summary>Ajuda: como funciona um Arduino?</summary><p>O Arduino é uma placa que executa instruções. Um pino de saída envia um sinal ao LED. O resistor protege o LED contra corrente excessiva. O GND fecha o caminho elétrico.</p></details>
+</section>
+<section class="panel">
+<h2>1. Monte o circuito</h2><p class="muted">Selecione para cada lâmpada o pino indicado. Marque o resistor e o fio de retorno ao GND depois de colocá-los.</p>
+<div class="board"><span class="chip">ARDUINO UNO · PINOS DIGITAIS</span><div class="wires" id="wires" style="margin-top:13px"></div></div>
+<h2 style="margin-top:23px">2. Programe com blocos</h2><p class="muted">Toque em um bloco para colocá-lo no programa. Use as setas para ajustar a ordem. Blocos soltos não funcionam.</p>
+<div class="tools" id="toolbox"></div><div class="workspace" id="workspace"></div>
+<div class="flex"><button class="secondary" id="example">Mostrar exemplo guiado</button><button class="secondary" id="clear">Limpar blocos</button></div>
+<div class="hint" id="tip"></div>
+</section>
+</div>
+<div class="footer">Projeto Computação nas Escolas · IMDAZ · Aprender, experimentar e descobrir</div>
+</main>
+<script>
+const colors={red:"Vermelho",yellow:"Amarelo",green:"Verde"};
+const missions=[
+{title:"A primeira luz",story:"O parque ficou escuro. Vamos acender a luz verde!",n:1,kind:"on",cycles:1,wait:0,focus:"green",desc:"Coloque ACENDER no pino 7.",tip:"O pino 7 controla o LED verde. Primeiro ligue o circuito; depois use ACENDER."},
+{title:"Luz que pisca",story:"Um aviso precisa piscar para chamar a atenção.",n:1,kind:"blink",cycles:1,wait:1,focus:"green",desc:"ACENDER, ESPERAR, APAGAR e ESPERAR, dentro de REPITA.",tip:"Para piscar, a lâmpada deve ter um tempo acesa e outro apagada."},
+{title:"O semáforo da escola",story:"Organize o trânsito na rua da escola.",n:1,kind:"traffic",cycles:1,wait:1,desc:"Verde, amarelo e vermelho devem acender um de cada vez.",tip:"Desligue uma cor antes de ligar a seguinte."},
+{title:"Conserte a luz",story:"A luz verde não apaga quando o amarelo aparece.",n:1,kind:"traffic",cycles:1,wait:2,desc:"Corrija a sequência e use esperas de 2 segundos.",tip:"Procure um comando APAGAR antes de trocar de cor."},
+{title:"Pedestres primeiro",story:"A turma precisa atravessar em segurança.",n:2,kind:"ped",cycles:1,wait:1,desc:"Veículos e pedestres não podem receber verde juntos.",tip:"Acenda vermelho dos carros quando acender verde dos pedestres."},
+{title:"Cruzamento seguro",story:"Duas ruas dividem um cruzamento movimentado.",n:2,kind:"cross",cycles:1,wait:1,desc:"O sinal verde deve alternar entre as duas ruas.",tip:"Não permita verdes simultâneos."},
+{title:"O tempo importa",story:"Na hora do recreio, os carros precisam de mais tempo.",n:1,kind:"traffic",cycles:1,wait:3,desc:"Configure pausas de 3 segundos.",tip:"Altere o valor do bloco ESPERAR para 3."},
+{title:"Alerta amarelo",story:"Uma equipe de manutenção precisa de um alerta piscante.",n:1,kind:"blink",cycles:1,wait:2,focus:"yellow",desc:"Faça o LED amarelo piscar com pausa de 2 segundos.",tip:"Escolha o pino 6 para o amarelo."},
+{title:"Travessia demorada",story:"Vamos aumentar o tempo para os pedestres.",n:2,kind:"ped",cycles:1,wait:3,desc:"Pedestres atravessam durante 3 segundos.",tip:"Desligue o verde dos carros antes de liberar a travessia."},
+{title:"Hora do rush",story:"Duas ruas têm mais movimento.",n:2,kind:"cross",cycles:1,wait:3,desc:"Use 3 segundos para cada passagem.",tip:"Use ESPERAR 3 e uma luz verde por vez."},
+{title:"Desafio da repetição",story:"A central de trânsito precisa repetir o ciclo para sempre.",n:1,kind:"looptraffic",cycles:2,wait:2,desc:"Repita o ciclo sem precisar apertar Iniciar novamente.",tip:"O primeiro bloco precisa ser REPITA. Coloque os comandos dentro dele."},
+{title:"Engenheiro da cidade",story:"A cidade conta com você para coordenar as travessias.",n:2,kind:"final",cycles:2,wait:2,desc:"Repita a alternância de duas ruas usando blocos.",tip:"Planeje a primeira rua, desligue o verde, depois libere a segunda."}
+];
+const pinMap=[{"a-red":5,"a-yellow":6,"a-green":7,"b-red":3,"b-green":4},{"a-red":5,"a-yellow":6,"a-green":7,"b-red":3,"b-green":4}];
+const initial=()=>({unlocked:0,completed:[],mission:0,step:0,blocks:{},wires:{}});
+let saved;try{saved=JSON.parse(localStorage.getItem("imdaz_semaforos_v3"))}catch(e){}
+let state=saved&&Array.isArray(saved.completed)?{...initial(),...saved}:initial();
+let timer=null,current={},seqIndex=0,lastTrace=[],lastWiring=false;
+const $=id=>document.getElementById(id);
+const save=()=>localStorage.setItem("imdaz_semaforos_v3",JSON.stringify(state));
+const idFor=(side,c)=>side+"-"+c;
+const activeWires=()=>{let m=missions[state.mission];if(m.kind==="on"||m.kind==="blink")return ["a-"+(m.focus||"green")];let a=["a-red","a-yellow","a-green"];return m.n===2?[...a,"b-red","b-green"]:a};
+const labelFor=id=>(id.startsWith("a")?"Carros ":"Pedestres / rua B ")+colors[id.split("-")[1]];
+const goals=(m)=>{let t=m.wait||1,k=(type,id,sec)=>({type,id,sec});
+let a=idFor("a",m.focus||"green");
+if(m.kind==="on")return[k("set",a,1)];
+if(m.kind==="blink")return[k("loop"),k("set",a,1),k("wait",null,t),k("set",a,0),k("wait",null,t)];
+if(m.kind==="traffic"||m.kind==="looptraffic")return[...(m.kind==="looptraffic"?[k("loop")]:[]),k("set","a-green",1),k("wait",null,t),k("set","a-green",0),k("set","a-yellow",1),k("wait",null,t),k("set","a-yellow",0),k("set","a-red",1),k("wait",null,t),k("set","a-red",0)];
+if(m.kind==="ped")return[k("set","b-red",1),k("set","a-green",1),k("wait",null,t),k("set","a-green",0),k("set","a-red",1),k("set","b-red",0),k("set","b-green",1),k("wait",null,t),k("set","b-green",0),k("set","b-red",1)];
+return[...(m.kind==="final"?[k("loop")]:[]),k("set","b-red",1),k("set","a-green",1),k("wait",null,t),k("set","a-green",0),k("set","a-yellow",1),k("wait",null,t),k("set","a-yellow",0),k("set","a-red",1),k("set","b-red",0),k("set","b-green",1),k("wait",null,t),k("set","b-green",0),k("set","b-red",1)]};
+const setMessage=(s,good=false)=>{$("message").textContent=s;$("message").className="notice "+(good?"success":"danger")};
+function stop(){if(timer)clearTimeout(timer);timer=null;current={};paint()}
+function paint(){document.querySelectorAll(".lamp").forEach(x=>x.classList.toggle("on",!!current[x.dataset.id]))}
+function stage(){let s=missions[state.mission].n; $("stage").innerHTML=Array.from({length:s},(_,i)=>{let side=i?"b":"a",cs=i?["red","green"]:["red","yellow","green"];return'<div class="signal-wrap"><div class="signal">'+cs.map(c=>'<div class="lamp '+c+'" data-id="'+side+'-'+c+'"></div>').join("")+'</div><b>'+(i?"Pedestres / rua B":"Rua A")+"</b></div>"}).join("");paint()}
+function wires(){let w=state.wires[state.mission]||{};$("wires").innerHTML=activeWires().map(id=>{let item=w[id]||{},expected=pinMap[0][id];return'<div class="wire"><label for="pin-'+id+'">'+labelFor(id)+'</label><select id="pin-'+id+'" data-pin="'+id+'"><option value="">Pino?</option>'+[2,3,4,5,6,7,8,9].map(p=>'<option value="'+p+'" '+(item.pin==p?"selected":"")+'>D'+p+"</option>").join("")+'</select><div><label title="Resistor de 220 ohms"><input type="checkbox" data-res="'+id+'" '+(item.res?"checked":"")+'> 220 Ω</label> <label title="Retorno ao GND"><input type="checkbox" data-gnd="'+id+'" '+(item.gnd?"checked":"")+'> GND</label></div></div>'}).join("");
+document.querySelectorAll("[data-pin],[data-res],[data-gnd]").forEach(el=>el.addEventListener("change",()=>{let id=el.dataset.pin||el.dataset.res||el.dataset.gnd;state.wires[state.mission]??={};let x=state.wires[state.mission][id]??={};if(el.dataset.pin)x.pin=Number(el.value);if(el.dataset.res)x.res=el.checked;if(el.dataset.gnd)x.gnd=el.checked;save()}))}
+function blocks(){return state.blocks[state.mission]??=[]}
+function renderBlocks(){let area=$("workspace"),ids=activeWires();area.innerHTML=blocks().length?"":"<p class='muted'>Seu programa está vazio. Escolha um bloco acima.</p>";
+blocks().forEach((b,i)=>{let box=document.createElement("div");box.className="block "+(b.type==="wait"?"wait":b.type==="loop"?"loop":"");
+let html=b.type==="loop"?"🔁 REPITA SEMPRE <small>todos os blocos abaixo</small>":b.type==="wait"?'⏱️ ESPERAR <input type="number" min="1" max="9" step="1" aria-label="Segundos" value="'+b.sec+'"> segundo(s)':'💡 DEFINIR <select aria-label="Pino">'+ids.map(id=>'<option value="'+id+'" '+(id===b.id?"selected":"")+'>D'+pinMap[0][id]+" · "+labelFor(id)+'</option>').join("")+'</select> <select aria-label="Ação"><option value="1" '+(b.sec===1?"selected":"")+'>ACENDER</option><option value="0" '+(b.sec===0?"selected":"")+'>APAGAR</option></select>';
+box.innerHTML=html+'<button class="mini" data-up="'+i+'" title="Subir">↑</button><button class="mini" data-down="'+i+'" title="Descer">↓</button><button class="mini" data-delete="'+i+'" title="Remover">×</button>';area.appendChild(box);
+if(b.type==="wait")box.querySelector("input").onchange=e=>{b.sec=Math.max(1,Math.min(9,Math.round(Number(e.target.value)||1)));save();renderBlocks()};
+if(b.type==="set"){let a=box.querySelectorAll("select");a[0].onchange=e=>{b.id=e.target.value;save()};a[1].onchange=e=>{b.sec=Number(e.target.value);save()}}
+box.querySelector("[data-up]").onclick=()=>move(i,-1);box.querySelector("[data-down]").onclick=()=>move(i,1);box.querySelector("[data-delete]").onclick=()=>{blocks().splice(i,1);save();renderBlocks()}
+})}
+function move(i,d){let a=blocks(),j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];save();renderBlocks()}
+function add(type){let b=type==="set"?{type,id:activeWires()[0],sec:1}:type==="wait"?{type,sec:1}:{type};blocks().push(b);save();renderBlocks()}
+function toolbox(){$("toolbox").innerHTML='<button class="tool" data-type="set">💡 DEFINIR PINO<small>Acender ou apagar LED</small></button><button class="tool" data-type="wait">⏱️ ESPERAR<small>Definir tempo em segundos</small></button><button class="tool" data-type="loop">🔁 REPITA SEMPRE<small>Recomeçar a sequência</small></button><button class="tool" id="how">❔ COMO USAR<small>Ver instruções</small></button>';document.querySelectorAll("[data-type]").forEach(x=>x.onclick=()=>add(x.dataset.type));$("how").onclick=()=>{$("tip").textContent="Toque em DEFINIR PINO. Escolha D7 · Carros Verde e ACENDER. Adicione ESPERAR para criar uma pausa. Use ↑ e ↓ para mudar a ordem dos blocos."}}
+function guide(){let m=missions[state.mission],steps=[
+"Conheça o desafio: "+m.story+" A missão pede: "+m.desc,
+"Monte a ligação: escolha o pino de cada LED, marque um resistor de 220 Ω e o retorno GND. Você pode conferir a pinagem na bancada.",
+"Monte os blocos: toque nos comandos, escolha os pinos e os tempos. Use 'Mostrar exemplo guiado' se precisar. "+m.tip,
+"Teste: clique em 'Testar meu programa', observe as lâmpadas e escolha 'Conferir missão' quando estiver funcionando."
+];$("instruction").textContent="PASSO "+(state.step+1)+" DE 4 · "+steps[state.step];$("stepbar").innerHTML=steps.map((x,i)=>'<span class="'+(i<=state.step?"done":"")+'"></span>').join("");$("prevStep").disabled=state.step===0;$("nextStep").textContent=state.step===3?"Voltar ao início":"Próxima etapa"}
+function render(){stop();let m=missions[state.mission];$("missionTitle").textContent="Missão "+(state.mission+1)+" · "+m.title;$("missionStory").textContent=m.story;$("tip").textContent="💡 Dica: "+m.tip;$("score").textContent=(state.completed.length*100)+" XP";$("badge").textContent=state.completed.length>=12?"Mestre dos Semáforos":state.completed.length>=6?"Engenheiro da Cidade":"Explorador";
+$("missions").innerHTML=missions.map((x,i)=>'<button class="mission '+(i===state.mission?"active":"")+'" data-mission="'+i+'" '+(i>state.unlocked?"disabled":"")+'><b>'+(i<state.unlocked||state.completed.includes(i)?"✅ ":"🔒 ").replace("🔒 ","")+'Missão '+(i+1)+'</b>'+x.title+'<small>'+(state.completed.includes(i)?"Concluída":i===state.mission?"Em andamento":i>state.unlocked?"Bloqueada":"Disponível")+"</small></button>").join("");
+document.querySelectorAll("[data-mission]").forEach(x=>x.onclick=()=>{state.mission=Number(x.dataset.mission);state.step=0;save();render()});stage();wires();toolbox();renderBlocks();guide();$("message").className="notice";$("message").textContent="Pronto para começar! Siga os quatro passos."}
+function checkWires(){let w=state.wires[state.mission]||{};return activeWires().every(id=>w[id]?.pin===pinMap[0][id]&&w[id]?.res&&w[id]?.gnd)}
+function signature(a){return a.map(b=>[b.type,b.id??"",b.sec??""].join(":")).join("|")}
+function expected(){return goals(missions[state.mission])}
+function checkProgram(){return signature(blocks())===signature(expected())}
+function eventTrace(a){let t=[],v={};let base=a.filter(b=>b.type!=="loop");for(let j=0;j<(a.some(b=>b.type==="loop")?2:1);j++)for(let x of base){if(x.type==="set"){v[x.id]=x.sec===1;t.push({state:{...v},sec:.65})}else if(x.type==="wait")t.push({state:{...v},sec:Math.min(x.sec,3)})}return t}
+function simulate(){stop();if(!checkWires()){setMessage("Confira os pinos, os resistores e os retornos GND antes de executar.");return}if(!blocks().length){setMessage("Seu programa ainda está vazio. Comece pelo bloco DEFINIR PINO.");return}let trace=eventTrace(blocks()),j=0;let step=()=>{if(j>=trace.length){timer=null;return}current=trace[j].state;paint();let bad=!!(current["a-green"]&&current["b-green"]);if(bad)setMessage("Atenção! Dois verdes ao mesmo tempo. É preciso corrigir o programa.");timer=setTimeout(()=>{j++;step()},trace[j].sec*450)};setMessage("Simulação em andamento. Observe os sinais.",true);step()}
+function check(){stop();if(!checkWires()){setMessage("A montagem ainda precisa de ajustes. Confira pinos, resistores e GND.");state.step=1;guide();return}
+if(!checkProgram()){setMessage("Os blocos ainda não correspondem ao desafio. Confira a ordem, os pinos e as esperas. Você consegue!");state.step=2;guide();return}
+let m=missions[state.mission],trace=eventTrace(blocks());if(trace.some(x=>x.state["a-green"]&&x.state["b-green"])){setMessage("Existe conflito entre sinais verdes. Corrija para proteger o cruzamento.");return}
+let finished=state.mission,first=!state.completed.includes(finished);if(first)state.completed.push(finished);state.unlocked=Math.max(state.unlocked,Math.min(11,finished+1));save();render();setMessage((first?"Parabéns! +100 XP. ":"Missão revisitada. ")+(finished===11?"Você concluiu a cidade!":"A próxima missão foi desbloqueada."),true)}
+$("nextStep").onclick=()=>{state.step=(state.step+1)%4;save();guide()};$("prevStep").onclick=()=>{state.step=Math.max(0,state.step-1);save();guide()};
+$("run").onclick=simulate;$("stop").onclick=stop;$("check").onclick=check;
+$("example").onclick=()=>{let a=expected();let b=blocks();if(b.length<a.length){b.push({...a[b.length]});save();renderBlocks();$("tip").textContent="✅ Próximo bloco colocado. Veja o comando e continue. Repita para aprender a sequência."}else {$("tip").textContent="O exemplo está completo. Agora teste, observe e experimente alterar os blocos."}};
+$("clear").onclick=()=>{stop();state.blocks[state.mission]=[];save();renderBlocks()};
+$("reset").onclick=()=>{if(confirm("Deseja apagar suas conquistas e recomeçar?")){stop();state=initial();save();render()}};
+render();
+</script>
+</body>
+</html>
