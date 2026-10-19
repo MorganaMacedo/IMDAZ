@@ -9,3 +9,7 @@ O Laboratório de Circuitos apresenta uma oficina de 120 minutos inspirada no fl
 Página pública: https://morganamacedo.github.io/IMDAZ/
 
 Laboratório de Circuitos: https://morganamacedo.github.io/IMDAZ/circuitos/
+
+Missão Semáforos: https://morganamacedo.github.io/IMDAZ/semaforos/
+
+A trilha Missão Semáforos reúne 12 desafios progressivos de eletrônica e lógica de programação, com bancada virtual, comandos em blocos, simulação e salvamento local do progresso.
