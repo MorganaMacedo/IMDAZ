@@ -59,7 +59,7 @@ let timer=null,current={},seqIndex=0,lastTrace=[],lastWiring=false;
 const $=id=>document.getElementById(id);
 const save=()=>localStorage.setItem("imdaz_semaforos_v3",JSON.stringify(state));
 const idFor=(side,c)=>side+"-"+c;
-const activeWires=()=>{let a=["a-red","a-yellow","a-green"];return missions[state.mission].n===2?[...a,"b-red","b-green"]:a};
+const activeWires=()=>{let m=missions[state.mission];if(m.kind==="on"||m.kind==="blink")return ["a-"+(m.focus||"green")];let a=["a-red","a-yellow","a-green"];return m.n===2?[...a,"b-red","b-green"]:a};
 const labelFor=id=>(id.startsWith("a")?"Carros ":"Pedestres / rua B ")+colors[id.split("-")[1]];
 const goals=(m)=>{let t=m.wait||1,k=(type,id,sec)=>({type,id,sec});
 let a=idFor("a",m.focus||"green");
@@ -104,7 +104,7 @@ function simulate(){stop();if(!checkWires()){setMessage("Confira os pinos, os re
 function check(){stop();if(!checkWires()){setMessage("A montagem ainda precisa de ajustes. Confira pinos, resistores e GND.");state.step=1;guide();return}
 if(!checkProgram()){setMessage("Os blocos ainda não correspondem ao desafio. Confira a ordem, os pinos e as esperas. Você consegue!");state.step=2;guide();return}
 let m=missions[state.mission],trace=eventTrace(blocks());if(trace.some(x=>x.state["a-green"]&&x.state["b-green"])){setMessage("Existe conflito entre sinais verdes. Corrija para proteger o cruzamento.");return}
-let first=!state.completed.includes(state.mission);if(first)state.completed.push(state.mission);state.unlocked=Math.max(state.unlocked,Math.min(11,state.mission+1));save();render();setMessage((first?"Parabéns! +100 XP. ":"Missão revisitada. ")+(state.mission===11?"Você concluiu a cidade!":"A próxima missão foi desbloqueada."),true)}
+let finished=state.mission,first=!state.completed.includes(finished);if(first)state.completed.push(finished);state.unlocked=Math.max(state.unlocked,Math.min(11,finished+1));save();render();setMessage((first?"Parabéns! +100 XP. ":"Missão revisitada. ")+(finished===11?"Você concluiu a cidade!":"A próxima missão foi desbloqueada."),true)}
 $("nextStep").onclick=()=>{state.step=(state.step+1)%4;save();guide()};$("prevStep").onclick=()=>{state.step=Math.max(0,state.step-1);save();guide()};
 $("run").onclick=simulate;$("stop").onclick=stop;$("check").onclick=check;
 $("example").onclick=()=>{let a=expected();let b=blocks();if(b.length<a.length){b.push({...a[b.length]});save();renderBlocks();$("tip").textContent="✅ Próximo bloco colocado. Veja o comando e continue. Repita para aprender a sequência."}else {$("tip").textContent="O exemplo está completo. Agora teste, observe e experimente alterar os blocos."}};
